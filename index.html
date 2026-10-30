@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="رابعة طب - Advanced Medical Study & Task Management System for Fourth-Year Medical Students">
+  <title>رابعة طب | Advanced Medical Study Management</title>
+
+  <!-- Luxury App Emblem / Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/views.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. AUTHENTICATION & LOGIN SCREEN
+       ========================================================================= -->
+  <div id="login-screen" class="login-screen-wrapper">
+    <div class="login-auth-card luxury-card">
+      <div class="auth-logo-large">
+        <img src="assets/logo.svg" alt="رابعة طب Logo" width="100%" height="100%">
+      </div>
+      
+      <h1 class="auth-arabic-title">رابعة طب</h1>
+      <h2 class="auth-english-subtitle">Advanced Medical Study Management</h2>
+      
+      <p class="auth-welcome-text">
+        Welcome, Doctor. Access your fourth-year curriculum, clinical lectures, interactive Umm al-Qura calendar, and dynamic examination countdown.
+      </p>
+
+      <button id="btn-google-login" class="btn btn-gold auth-btn-google">
+        <svg width="20" height="20" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <button id="btn-guest-mode" class="btn btn-secondary auth-offline-btn">
+        Explore in Offline / Guest Session
+      </button>
+
+      <p class="auth-footer-note">
+        Cross-device synchronization powered by Firebase Cloud Firestore.
+      </p>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. MAIN APPLICATION WORKSPACE
+       ========================================================================= -->
+  <div id="app-container" class="hidden">
+
+    <!-- RIGHT-SIDE PROFESSIONAL SIDEBAR NAVIGATION -->
+    <aside id="app-sidebar" class="app-sidebar">
+      <div class="sidebar-brand-box">
+        <div class="brand-emblem-wrap">
+          <img src="assets/logo.svg" alt="App Emblem">
+        </div>
+        <div class="brand-text-col">
+          <span class="brand-arabic-name">رابعة طب</span>
+          <span class="brand-subtext">Medical Academic System</span>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav-list">
+        <li class="sidebar-nav-item active" data-view="dashboard">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span class="sidebar-item-text">Dashboard</span>
+        </li>
+        <li class="sidebar-nav-item" data-view="subjects">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <span class="sidebar-item-text">Subjects</span>
+        </li>
+        <li class="sidebar-nav-item" data-view="calendar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span class="sidebar-item-text">Calendar</span>
+        </li>
+        <li class="sidebar-nav-item" data-view="today">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          <span class="sidebar-item-text">Today's Tasks</span>
+        </li>
+        <li class="sidebar-nav-item" data-view="analytics">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span class="sidebar-item-text">Topic Progression</span>
+        </li>
+        <li class="sidebar-nav-item" data-view="settings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span class="sidebar-item-text">Settings</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer-profile">
+        <img src="assets/logo.svg" alt="User Profile" class="footer-avatar user-avatar-img">
+        <div class="footer-user-meta">
+          <span class="footer-user-name user-display-name">Medical Student</span>
+          <span class="footer-user-role">Fourth Year &bull; رابعة طب</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN INTERACTIVE LAYOUT -->
+    <main class="app-main-layout">
+      <!-- Top Application Header -->
+      <header class="app-top-header">
+        <div class="top-header-left">
+          <button id="sidebar-toggle-btn" class="sidebar-toggle-btn" title="Toggle Navigation">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <span class="top-app-title-badge">رابعة طب</span>
+        </div>
+
+        <div class="top-header-center" id="top-bar-dual-date">
+          <!-- Populated by JavaScript with Gregorian & Hijri dates -->
+        </div>
+
+        <div class="top-header-right">
+          <div class="exam-pill-shortcut" data-navigate="dashboard" title="Final Examination Countdown">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            <span>Exam in <strong class="exam-days exam-pill-num">--</strong> days</span>
+          </div>
+
+          <button id="top-bar-logout" class="btn-icon-xs text-danger" title="Sign Out">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- View Containers (Single Page Application Router) -->
+      <div class="app-content-body">
+        <section id="view-dashboard" class="view-section"></section>
+        <section id="view-subjects" class="view-section hidden"></section>
+        <section id="view-calendar" class="view-section hidden"></section>
+        <section id="view-today" class="view-section hidden"></section>
+        <section id="view-analytics" class="view-section hidden"></section>
+        <section id="view-settings" class="view-section hidden"></section>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- =========================================================================
+       3. MODALS CONTAINER
+       ========================================================================= -->
+
+  <!-- MODAL: ADD TASK (OPTION A: CUSTOM TASK | OPTION B: TASK FROM SUBJECTS) -->
+  <div id="modal-add-task" class="modal-overlay">
+    <div class="modal-dialog luxury-card">
+      <div class="modal-header">
+        <h2 class="card-gold-title">Schedule Academic Task</h2>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+
+      <form id="form-add-task">
+        <div class="form-group">
+          <label class="form-label" for="task-date-input">Scheduled Date</label>
+          <input type="date" id="task-date-input" class="form-control" required>
+        </div>
+
+        <div class="luxury-card" style="padding: 1.15rem; margin-bottom: 1.25rem; background: rgba(6, 11, 20, 0.45);">
+          <span class="gold-badge-kicker">OPTION B: TASK FROM MEDICAL SUBJECTS</span>
+          <p class="text-muted text-sm" style="margin: 0.35rem 0 0.85rem;">
+            Selecting a lecture dynamically sets its title as your scheduled task.
+          </p>
+
+          <div class="form-row-dual">
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+              <label class="form-label" for="task-subject-select">1. Select Subject</label>
+              <select id="task-subject-select" class="form-control">
+                <option value="">-- Optional: Select Subject --</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+              <label class="form-label" for="task-lecture-select">2. Select Branch / Lecture</label>
+              <select id="task-lecture-select" class="form-control" disabled>
+                <option value="">-- First Choose a Subject --</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="task-title-input">Task Title (Custom or Lecture Name)</label>
+          <input type="text" id="task-title-input" class="form-control" placeholder="e.g. Study pathology, Solve 30 MCQs, or selected lecture title...">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="task-desc-input">Optional Description &amp; Study Goal</label>
+          <textarea id="task-desc-input" class="form-control" rows="3" placeholder="Target topics, textbook pages, clinical notes..."></textarea>
+        </div>
+
+        <div class="modal-footer-flex">
+          <button type="button" class="btn btn-secondary btn-sm modal-cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-gold btn-sm">Save &amp; Schedule Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: TASK DETAILS & EDIT -->
+  <div id="modal-task-details" class="modal-overlay"></div>
+
+  <!-- MODAL: EDIT EXAMINATION TARGET DATE & TIME -->
+  <div id="modal-edit-exam" class="modal-overlay">
+    <div class="modal-dialog luxury-card">
+      <div class="modal-header">
+        <h2 class="card-gold-title">Edit Final Examination Target</h2>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+
+      <form id="form-modal-edit-exam">
+        <p class="text-muted text-sm" style="margin-bottom: 1.25rem;">
+          Update the official target date and time for your fourth-year examinations. All countdown timers will update immediately.
+        </p>
+
+        <div class="form-row-dual">
+          <div class="form-group">
+            <label class="form-label" for="modal-exam-date">Examination Date</label>
+            <input type="date" id="modal-exam-date" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="modal-exam-time">Examination Time</label>
+            <input type="time" id="modal-exam-time" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="modal-footer-flex">
+          <button type="button" class="btn btn-secondary btn-sm modal-cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-gold btn-sm">Save Examination Target</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: LECTURE NOTES & STUDY DETAILS -->
+  <div id="modal-lecture-notes" class="modal-overlay">
+    <div class="modal-dialog luxury-card">
+      <div class="modal-header">
+        <h2 class="card-gold-title" id="notes-modal-lecture-title">Lecture Study Notes</h2>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="lecture-notes-textarea">Personal Clinical Notes &amp; High-Yield Points</label>
+        <textarea id="lecture-notes-textarea" class="form-control" rows="8" placeholder="Enter key diagnostic criteria, pharmacological pearls, mnemonic aids, or exam traps..."></textarea>
+      </div>
+
+      <div class="modal-footer-flex">
+        <button type="button" class="btn btn-secondary btn-sm modal-cancel-btn">Cancel</button>
+        <button type="button" id="btn-save-lecture-notes" class="btn btn-gold btn-sm">Save Lecture Notes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: FIREBASE CONFIGURATION (IN-APP SETUP) -->
+  <div id="modal-firebase-config" class="modal-overlay">
+    <div class="modal-dialog luxury-card">
+      <div class="modal-header">
+        <h2 class="card-gold-title">Firebase Cloud Configuration</h2>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+
+      <form id="form-firebase-config">
+        <p class="text-muted text-sm" style="margin-bottom: 1.25rem;">
+          Connect your personal Firebase project to enable cross-device Google Sign-In and Cloud Firestore synchronization.
+        </p>
+
+        <div class="form-group">
+          <label class="form-label" for="fb-api-key">API Key</label>
+          <input type="text" id="fb-api-key" class="form-control" placeholder="AIzaSy..." required>
+        </div>
+
+        <div class="form-row-dual">
+          <div class="form-group">
+            <label class="form-label" for="fb-project-id">Project ID</label>
+            <input type="text" id="fb-project-id" class="form-control" placeholder="rabia-tib-medical" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fb-auth-domain">Auth Domain</label>
+            <input type="text" id="fb-auth-domain" class="form-control" placeholder="rabia-tib-medical.firebaseapp.com" required>
+          </div>
+        </div>
+
+        <div class="form-row-dual">
+          <div class="form-group">
+            <label class="form-label" for="fb-storage-bucket">Storage Bucket</label>
+            <input type="text" id="fb-storage-bucket" class="form-control" placeholder="rabia-tib-medical.appspot.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fb-messaging-sender-id">Messaging Sender ID</label>
+            <input type="text" id="fb-messaging-sender-id" class="form-control" placeholder="1029384756">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="fb-app-id">App ID</label>
+          <input type="text" id="fb-app-id" class="form-control" placeholder="1:1029384756:web:abcd1234">
+        </div>
+
+        <div class="modal-footer-flex">
+          <button type="button" class="btn btn-secondary btn-sm modal-cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-gold btn-sm">Connect &amp; Reload Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main JavaScript ES6 Module -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
+
